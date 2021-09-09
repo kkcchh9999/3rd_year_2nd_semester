@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">권철현_calc</string>
+    <string name="first_input">number1 :</string>
+    <string name="second_input">number2 :</string>
+</resources>
