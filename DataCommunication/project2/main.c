@@ -81,10 +81,67 @@ int main(int argc, char *argv[]) {
 		if(j == 16) {
 			j = 0;
 			//더하기  
-			for (int k = 0; k < 16; k++) {
-				sum[k] += checksum[k];	
+			for (int k = 15; k >= 0; k--) {
+				if (sum[k] == 2 && k!= 0) {
+					sum[k-1] += 1;
+					sum[k] = 0;
+				}
+				if (sum[k] == 2 && k==0) {
+					sum[15] += 1;
+					sum[k] = 0; 
+				}
+				sum[k] += checksum[k];
+				if (sum[k] == 2 && k !=0 ) {
+					sum[k-1] += 1;
+					sum[k] = 0;
+				}	
+				if (sum[k] == 2 && k == 0) {
+					sum[15] += 1;
+					sum[k] = 0; 
+				}
+			}	//캐리 발생한거 처리.	
+			for (int k = 15; k >= 0; k--) {
+				if (sum[k] == 2 && k!= 0) {
+					sum[k-1] += 1;
+					sum[k] = 0;
+				}
+				if (sum[k] == 2 && k==0) {
+					sum[15] += 1;
+					sum[k] = 0; 
+				}
+				if (sum[k] == 2 && k !=0 ) {
+					sum[k-1] += 1;
+					sum[k] = 0;
+				}	
+				if (sum[k] == 2 && k == 0) {
+					sum[15] += 1;
+					sum[k] = 0; 
+				}
+			}	//혹시 한번 더 캐리 발생한거 처 리 
+			for (int k = 15; k >= 0; k--) {
+				if (sum[k] == 2 && k!= 0) {
+					sum[k-1] += 1;
+					sum[k] = 0;
+				}
+				if (sum[k] == 2 && k==0) {
+					sum[15] += 1;
+					sum[k] = 0; 
+				}
+				if (sum[k] == 2 && k !=0 ) {
+					sum[k-1] += 1;
+					sum[k] = 0;
+				}	
+				if (sum[k] == 2 && k == 0) {
+					sum[15] += 1;
+					sum[k] = 0; 
+				}
 			}		
 		}
+	}
+	//출력  
+	for(int i = 0; i<16; i++) {	
+		checksum[i] = !sum[i];
+		printf("%d", checksum[i]);
 	}
 
 	return 0;
