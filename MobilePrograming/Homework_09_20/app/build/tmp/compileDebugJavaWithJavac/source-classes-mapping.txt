@@ -1,0 +1,6 @@
+com/example/homework_09_20/BuildConfig.java
+ com.example.homework_09_20.BuildConfig
+com/example/homework_09_20/MainActivity.java
+ com.example.homework_09_20.MainActivity
+ com.example.homework_09_20.MainActivity$1
+ com.example.homework_09_20.MainActivity$2
