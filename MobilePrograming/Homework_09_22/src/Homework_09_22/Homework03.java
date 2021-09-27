@@ -1,4 +1,6 @@
-public class Homework3 {
+package Homework_09_22;
+
+public class Homework03 {
     public static void main(String[] args) {
         int count = 85;
         if (count > 90) {

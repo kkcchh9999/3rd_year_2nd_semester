@@ -1,4 +1,6 @@
-public class Homework5 {
+package Homework_09_22;
+
+public class Homework05 {
     static int var = 100;
     public static void main(String args[]) {
         int var = 0;

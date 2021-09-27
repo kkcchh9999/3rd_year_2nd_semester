@@ -1,4 +1,6 @@
-public class Homework2 {
+package Homework_09_22;
+
+public class Homework02 {
     public static void main(String[] args) {
         int var1 = 10;
         float var2 = 10.1f;

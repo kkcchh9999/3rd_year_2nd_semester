@@ -1,4 +1,6 @@
-public class Homework4 {
+package Homework_09_22;
+
+public class Homework04 {
     public static void main(String[] args) {
         int[] one = new int[3];
         for (int i = 0; i < one.length; i++) {
