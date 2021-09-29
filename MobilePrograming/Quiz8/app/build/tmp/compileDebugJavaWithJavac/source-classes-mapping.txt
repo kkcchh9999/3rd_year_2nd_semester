@@ -1,0 +1,5 @@
+com/example/quiz8/BuildConfig.java
+ com.example.quiz8.BuildConfig
+com/example/quiz8/MainActivity.java
+ com.example.quiz8.MainActivity
+ com.example.quiz8.MainActivity$1
