@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:stretchColumns="1,2,3,4,5"
+    tools:context=".MainActivity">
+
+    <TableRow>
+        <TextView android:text="      "
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="월"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="화"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="수"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="목"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="금"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+    </TableRow>
+    <TableRow
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <TextView
+            android:layout_height="match_parent"
+            android:text="09:00\n~\n10:30"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="우용태\n교수"
+            android:backgroundTint="#FFA7A7"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="안동혁\n교수"
+            android:backgroundTint="#FFDCA7"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="강동현\n교수"
+            android:backgroundTint="#FFC6A7"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="이우선\n교수"
+            android:backgroundTint="#F6FFA7"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="            "
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+
+    </TableRow>
+    <TableRow
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <TextView
+            android:layout_height="match_parent"
+            android:text="10:30\n~\n12:00"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="강동현\n교수"
+            android:backgroundTint="#FFC6A7"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="이우선\n교수"
+            android:backgroundTint="#F6FFA7"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="우용태\n교수"
+            android:backgroundTint="#FFA7A7"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="안동혁\n교수"
+            android:backgroundTint="#FFDCA7"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text=""
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+
+    </TableRow>
+    <TableRow
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <TextView
+            android:layout_height="match_parent"
+            android:text="12:00\n~\n13:30"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text=""
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text=""
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="강동현\n교수"
+            android:backgroundTint="#CCFFA7"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text=""
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text=""
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+
+    </TableRow>
+    <TableRow
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <TextView
+            android:layout_height="match_parent"
+            android:text="13:30\n~\n15:00"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="강동현\n교수"
+            android:backgroundTint="#CCFFA7"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text=""
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text=""
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text=""
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text=""
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+
+    </TableRow>
+    <TableRow
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <TextView
+            android:layout_height="match_parent"
+            android:text="15:00\n~\n16:30"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="송유진\n교수"
+            android:backgroundTint="#A7FFB0"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text=""
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text=""
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="이수현\n교수"
+            android:backgroundTint="#A7FFF5"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text=""
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+
+    </TableRow>
+    <TableRow
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <TextView
+            android:layout_height="match_parent"
+            android:text="16:30\n~\n18:00"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text=""
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="이수현\n교수"
+            android:backgroundTint="#A7FFF5"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text="송유진\n교수"
+            android:backgroundTint="#A7FFB0"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text=""
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+        <TextView android:text=""
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/textview_layout"/>
+
+    </TableRow>
+
+</TableLayout>
