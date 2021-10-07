@@ -38,7 +38,7 @@ fun main() {
     }
 
 
-    //키의 모음 갯수만큼 카운트
+    //키의 모음 갯수만큼 카운트 and 시프트
     for (i in input!!.indices) {
         if (input[i] in 'a'..'z') {
             shiftInput += if (input[i] + vowelCount > 'z') {
@@ -54,6 +54,8 @@ fun main() {
             }
         }
     }
+
+    println("KEY 의 모음 수 만큼 shift : [$shiftInput]")
 
     //배열 생성
     val arrSize = if (input!!.length % key!!.length == 0) {
