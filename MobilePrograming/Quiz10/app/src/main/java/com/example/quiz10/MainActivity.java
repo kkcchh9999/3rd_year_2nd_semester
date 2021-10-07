@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
         calendar = findViewById(R.id.calendar);
         timePicker = findViewById(R.id.timepicker);
         tvEnd = findViewById(R.id.tv_end);
-        timePicker.setVisibility(View.INVISIBLE);
-        calendar.setVisibility(View.INVISIBLE);
 
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
