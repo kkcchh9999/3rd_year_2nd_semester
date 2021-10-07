@@ -92,8 +92,7 @@ fun main() {
             passwordBeforeVigenere += array[j][i]
         }
     }
-    print("비즈네르 이전 암호문 : ")
-    println(passwordBeforeVigenere)
+    println("비즈네르 이전 암호문 : [$passwordBeforeVigenere]")
 
     //비즈네트 암호화
     var keyCount = 0
@@ -119,5 +118,5 @@ fun main() {
         }
     }
 
-    println("완성된 암호문 : \'$password\'")
+    println("완성된 암호문 : [$password]")
 }
