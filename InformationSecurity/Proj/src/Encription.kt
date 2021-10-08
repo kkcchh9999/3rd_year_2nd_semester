@@ -73,6 +73,7 @@ fun main() {
         keyMap[keySort[i]] = i
     }
 
+    println(keySort)
     //배열에 저장하기
     var countRow = 0
     var countColumn = 0
