@@ -1,5 +1,3 @@
-import java.util.*
-import kotlin.collections.HashMap
 
 fun main() {
 
@@ -9,13 +7,13 @@ fun main() {
 
     //비즈네르 암호
     var vigenere = Array<CharArray>(26) { CharArray(26) }
-    var alphabet = 'a'
+    var alphabet = 'A'
     for (i in 0..25) {
         for (j in 0..25) {
             vigenere[i][j] = alphabet
             alphabet ++
-            if (alphabet > 'z') {
-                alphabet = 'a'
+            if (alphabet > 'Z') {
+                alphabet = 'A'
             }
         }
         alphabet++
@@ -37,7 +35,8 @@ fun main() {
         keySort.add(key[i])
     }
 
-
+    //flag = 1 -> 소문자, 0 -> 대문자
+    var flag = 0;
     //키의 모음 갯수만큼 카운트 and 시프트
     for (i in input!!.indices) {
         if (input[i] in 'a'..'z') {
@@ -46,12 +45,14 @@ fun main() {
             } else {
                 (input[i]+vowelCount)
             }
+            flag = 1;
         } else if (input [i] in 'A'..'Z') {
             shiftInput += if (input[i] + vowelCount > 'Z') {
                 (input[i]+vowelCount-26)
             } else {
                 (input[i]+vowelCount)
             }
+            flag = 0;
         }
     }
 
@@ -120,5 +121,8 @@ fun main() {
         }
     }
 
+    if (flag == 1) {
+        password = password.toLowerCase()
+    }
     println("완성된 암호문 : [$password]")
 }
