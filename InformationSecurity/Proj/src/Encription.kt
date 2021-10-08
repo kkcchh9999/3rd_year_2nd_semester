@@ -36,7 +36,7 @@ fun main() {
     }
 
     //flag = 1 -> 소문자, 0 -> 대문자
-    var flag = 0;
+    var flag = 0
     //키의 모음 갯수만큼 카운트 and 시프트
     for (i in input!!.indices) {
         if (input[i] in 'a'..'z') {
@@ -45,14 +45,14 @@ fun main() {
             } else {
                 (input[i]+vowelCount)
             }
-            flag = 1;
+            flag = 1
         } else if (input [i] in 'A'..'Z') {
             shiftInput += if (input[i] + vowelCount > 'Z') {
                 (input[i]+vowelCount-26)
             } else {
                 (input[i]+vowelCount)
             }
-            flag = 0;
+            flag = 0
         }
     }
 
