@@ -3,6 +3,7 @@ package com.example.quiz13;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements androidx.appcompa
             if (tabName == "스톱워치") {
                 Chronometer chronometer = new Chronometer(super.getContext());
                 chronometer.setFormat("%s");
+                chronometer.setGravity(Gravity.CENTER);
 
                 Button btnStart = new Button(super.getContext());
                 Button btnEnd = new Button(super.getContext());
