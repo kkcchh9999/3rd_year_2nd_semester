@@ -1,0 +1,10 @@
+#Wed Oct 27 13:08:24 KST 2021
+base.2=D\:\\20173041\\3rd_year_2nd_semester\\MobilePrograming.Quiz14\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\2\\classes.dex
+path.2=2/classes.dex
+base.1=D\:\\20173041\\3rd_year_2nd_semester\\MobilePrograming.Quiz14\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+path.1=0/classes.dex
+base.0=D\:\\20173041\\3rd_year_2nd_semester\\MobilePrograming.Quiz14\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+path.0=classes.dex
