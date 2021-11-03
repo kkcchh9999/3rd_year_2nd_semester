@@ -4,6 +4,8 @@ package com.example.accident_alert_project.data
 import com.google.gson.annotations.SerializedName
 
 data class Item(
+    //공공데이터 포털에서 제공하는 API 사용시
+    //가져오는 JSON 파일의 형식
     @SerializedName("afos_fid")
     var afosFid: Int,
     @SerializedName("afos_id")
