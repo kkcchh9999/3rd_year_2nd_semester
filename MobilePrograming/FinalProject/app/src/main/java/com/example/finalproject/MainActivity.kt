@@ -1,9 +1,18 @@
 package com.example.finalproject;
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.example.finalproject.data.Coordinate
+import com.example.finalproject.data.Location
+import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -13,7 +22,19 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
+const val REQUEST_PERMISSION_CODE = 1
+
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var btnUpdate: ImageButton
+    private lateinit var btnStart: Button
+    private lateinit var btnStop: Button
+
+    val permissions = arrayOf ( //접근성
+        android.Manifest.permission.ACCESS_COARSE_LOCATION,
+        android.Manifest.permission.ACCESS_FINE_LOCATION
+    )
 
     private lateinit var locationAPI: LocationAPI //데이터 파싱
     private val client = OkHttpClient.Builder() //인터셉터 인스턴스 생성
@@ -69,17 +90,31 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        if (checkPermissions()) {
+            Log.d("위치", getLocation().toString())
+        } else {
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_PERMISSION_CODE)
+        }
+
+
         locationAPI = retrofit.create(LocationAPI::class.java)  //인스턴스 생성
 
-        for (i in locCodeArr.indices) {
-            for (j in 1 until locCodeArr[i].size) {
-                getLocation(locCodeArr[i][0], locCodeArr[i][j])
-                checkFor ++
+        btnUpdate = findViewById(R.id.btn_update)
+        btnStart = findViewById(R.id.btn_start)
+        btnStop = findViewById(R.id.btn_stop)
+
+        btnUpdate.setOnClickListener {
+            for (i in locCodeArr.indices) {
+                for (j in 1 until locCodeArr[i].size) {
+                    update(locCodeArr[i][0], locCodeArr[i][j])
+                    checkFor ++
+                }
             }
         }
+
     }
 
-    private fun getLocation(SiDo: Int, guGun: Int) {
+    private fun update(SiDo: Int, guGun: Int) {
         val locationRequest: Call<Location> = locationAPI.getLocation(SiDo.toString(), guGun.toString())
         var loc: Location? = null
         locationRequest.enqueue(object : Callback<Location> {
@@ -109,5 +144,32 @@ class MainActivity : AppCompatActivity() {
                 Log.d("몇개?", "$checkThread, $checkFor")
             }
         })
+    }
+
+    private fun checkPermissions(): Boolean {
+        for (i in permissions) {
+            if (ActivityCompat.checkSelfPermission(this, i) != PackageManager.PERMISSION_GRANTED) {
+                return false
+            }
+        }
+        return true
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        getLocation()
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getLocation(): LatLng {
+        val locationProvider: String = LocationManager.GPS_PROVIDER
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val lastLocation: android.location.Location? = locationManager.getLastKnownLocation(locationProvider)
+
+        return LatLng(lastLocation!!.latitude, lastLocation.longitude)
     }
 }

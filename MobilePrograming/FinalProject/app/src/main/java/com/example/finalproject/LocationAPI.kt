@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import com.example.finalproject.data.Location
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
