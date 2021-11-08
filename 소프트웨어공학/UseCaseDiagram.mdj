@@ -62,7 +62,7 @@
 											"top": 485,
 											"width": 62,
 											"height": 13,
-											"text": "유저"
+											"text": "사용자"
 										},
 										{
 											"_type": "LabelView",
@@ -3433,7 +3433,7 @@
 									"font": "Arial;13;0",
 									"left": 520,
 									"top": 424,
-									"width": 55.65625,
+									"width": 55.72607421875,
 									"height": 13,
 									"alpha": 1.0052702643518958,
 									"distance": 29.068883707497267,
@@ -3528,7 +3528,7 @@
 									"font": "Arial;13;0",
 									"left": 552,
 									"top": 487,
-									"width": 55.65625,
+									"width": 55.72607421875,
 									"height": 13,
 									"alpha": 1.968082902079012,
 									"distance": 21.95449840010015,
@@ -3623,7 +3623,7 @@
 									"font": "Arial;13;0",
 									"left": 832,
 									"top": 415,
-									"width": 55.65625,
+									"width": 55.72607421875,
 									"height": 13,
 									"alpha": 1.9782264060347596,
 									"distance": 25.45584412271571,
@@ -3683,7 +3683,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF84K0cWUxedsg="
 					},
-					"name": "유저",
+					"name": "사용자",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
