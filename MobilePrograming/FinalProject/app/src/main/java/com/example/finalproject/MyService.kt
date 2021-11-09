@@ -6,6 +6,9 @@ import android.content.Intent
 import android.os.IBinder
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import com.example.finalproject.data.Coordinate
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
@@ -15,7 +18,8 @@ class MyService : Service() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient   //위치좌표 가져오기
     private val viewModel = CoordinateViewModel()
-    //private val coordinateList = viewModel.testJeju
+    private val coordinateList = viewModel.testJeju
+
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if (intent == null) {
@@ -43,10 +47,15 @@ class MyService : Service() {
         } catch (e: Exception) {
 
         }
-        //Log.d("체크", coordinateList.toString())
+
+
+        coordinateList.observeForever {
+            for (i in it.indices) {
+                Log.d("제주 체크", "${it[i].longitude}, ${it[i].longitude}")
+            }
+        }
     }
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
-
 }

@@ -11,7 +11,7 @@ class CoordinateViewModel : ViewModel() {
     fun insertCoordinate(coordinate: Coordinate) =
         coordinateRepository.insertCoordinate(coordinate)
 
-//    val testJeju = coordinateRepository.getCoordinate(50)
+    val testJeju = coordinateRepository.getCoordinate(50)
     fun getCoordinate(siDo: Int) =
         coordinateRepository.getCoordinate(siDo)
 }
