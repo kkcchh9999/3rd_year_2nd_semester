@@ -1,4 +1,4 @@
-package com.example.finalproject;
+package com.example.finalproject.Internet;
 
 import com.example.finalproject.data.Location
 import retrofit2.Call
