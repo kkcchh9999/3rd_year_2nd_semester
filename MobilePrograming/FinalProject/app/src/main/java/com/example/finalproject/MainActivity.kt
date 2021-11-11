@@ -1,7 +1,9 @@
 package com.example.finalproject;
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +14,8 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Internet.LocationAPI
 import com.example.finalproject.Internet.LocationInterceptor
 import com.example.finalproject.data.Coordinate
@@ -29,10 +33,28 @@ const val REQUEST_PERMISSION_CODE = 1
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var btnUpdate: ImageButton
     private lateinit var btnStart: Button
     private lateinit var btnStop: Button
-    private lateinit var tv: TextView
+
+    private lateinit var btn1: Button
+    private lateinit var btn2: Button
+    private lateinit var btn3: Button
+    private lateinit var btn4: Button
+    private lateinit var btn5: Button
+    private lateinit var btn6: Button
+    private lateinit var btn7: Button
+    private lateinit var btn8: Button
+    private lateinit var btn9: Button
+    private lateinit var btn10: Button
+    private lateinit var btn11: Button
+    private lateinit var btn12: Button
+    private lateinit var btn13: Button
+    private lateinit var btn14: Button
+    private lateinit var btn15: Button
+    private lateinit var btn16: Button
+    private lateinit var btn17: Button
+
+    //공유 프리퍼런스
 
     private lateinit var locationAPI: LocationAPI //데이터 파싱
     private val client = OkHttpClient.Builder() //인터셉터 인스턴스 생성
@@ -46,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         .build()
 
     private val viewModel = CoordinateViewModel()   //뷰모델
-    //private var coordinateList: MutableList<Coordinate> = emptyList<Coordinate>().toMutableList()   //좌표쌍의 리스트
+
     private var locCodeArr = arrayOf(
         arrayOf(11, 680, 740, 305, 500, 620, 215, 530, 545, 350, 320,
             230, 590, 440, 410, 650, 200, 290, 710, 470, 560, 170,
@@ -88,7 +110,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val locationPermissionRequest = registerForActivityResult(
+        val locationPermissionRequest = registerForActivityResult(  //퍼미션 요청, 퍼미션 없을 때 행동
             ActivityResultContracts.RequestMultiplePermissions()
         ) { permissions ->
             when {
@@ -99,38 +121,149 @@ class MainActivity : AppCompatActivity() {
                     // Only approximate location access granted.
                 } else -> {
                 Toast.makeText(applicationContext, "권한이 필요합니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show()
+                onDestroy() //토스트 생성, 앱 종료
             }
             }
         }
 
-        locationPermissionRequest.launch(arrayOf(
+        locationPermissionRequest.launch(arrayOf(   //퍼미션 요청
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION)
         )
 
         locationAPI = retrofit.create(LocationAPI::class.java)  //인스턴스 생성
-
-        btnUpdate = findViewById(R.id.btn_update)
-        btnStart = findViewById(R.id.btn_start)
+        btnStart = findViewById(R.id.btn_start) //버튼 id 찾기
         btnStop = findViewById(R.id.btn_stop)
-        tv = findViewById(R.id.tv)
+        btn1 = findViewById(R.id.btn1)
+        btn2 = findViewById(R.id.btn2)
+        btn3 = findViewById(R.id.btn3)
+        btn4 = findViewById(R.id.btn4)
+        btn5 = findViewById(R.id.btn5)
+        btn6 = findViewById(R.id.btn6)
+        btn7 = findViewById(R.id.btn7)
+        btn8 = findViewById(R.id.btn8)
+        btn9 = findViewById(R.id.btn9)
+        btn10 = findViewById(R.id.btn10)
+        btn11 = findViewById(R.id.btn11)
+        btn12 = findViewById(R.id.btn12)
+        btn13 = findViewById(R.id.btn13)
+        btn14 = findViewById(R.id.btn14)
+        btn15 = findViewById(R.id.btn15)
+        btn16 = findViewById(R.id.btn16)
+        btn17 = findViewById(R.id.btn17)
 
-        btnUpdate.setOnClickListener {
+        val pref: SharedPreferences = getSharedPreferences(getString(R.string.app_name), Activity.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = pref.edit() //에디터
+
+        //공유 프리퍼런스
+        val first: Boolean = pref.getBoolean("isFirst", true);
+        if (first) {
+            editor.putBoolean("isFirst", false)
+            editor.apply()
+            Toast.makeText(this, "최초실행", Toast.LENGTH_SHORT).show()
             for (i in locCodeArr.indices) {
                 for (j in 1 until locCodeArr[i].size) {
                     update(locCodeArr[i][0], locCodeArr[i][j])
                 }
             }
+
+        } else {
+            Log.d("최초실행?", "ㄴㄴ")
         }
 
         btnStart.setOnClickListener {
             val intent = Intent(applicationContext, MyService::class.java)
-            startService(intent)
+            startService(intent)    //서비스 시작
         }
 
         btnStop.setOnClickListener {
             val intent = Intent(applicationContext, MyService::class.java)
-            stopService(intent)
+            stopService(intent)     //서비스 종료
+        }
+
+        btn1.setOnClickListener {
+            editor.putInt("siDo", 11)   // 서울
+            editor.apply()
+        }
+
+        btn2.setOnClickListener {
+            editor.putInt("siDo", 26)   //부산
+            editor.apply()
+        }
+
+        btn3.setOnClickListener {
+            editor.putInt("siDo", 27)   //대구
+            editor.apply()
+        }
+
+        btn4.setOnClickListener {
+            editor.putInt("siDo", 28)   //인천
+            editor.apply()
+        }
+
+        btn5.setOnClickListener {
+            editor.putInt("siDo", 29)   //광주
+            editor.apply()
+        }
+
+        btn6.setOnClickListener {
+            editor.putInt("siDo", 30)   //대전
+            editor.apply()
+        }
+
+        btn7.setOnClickListener {
+            editor.putInt("siDo", 31)   //울산
+            editor.apply()
+        }
+
+        btn8.setOnClickListener {
+            editor.putInt("siDo", 36)   // 세종
+            editor.apply()
+        }
+
+        btn9.setOnClickListener {
+            editor.putInt("siDo", 41)   //경기
+            editor.apply()
+        }
+
+        btn10.setOnClickListener {
+            editor.putInt("siDo", 42)   //강원
+            editor.apply()
+        }
+
+        btn11.setOnClickListener {
+            editor.putInt("siDo", 43)   //충북
+            editor.apply()
+        }
+
+        btn12.setOnClickListener {
+            editor.putInt("siDo", 44)   //충남
+            editor.apply()
+        }
+
+        btn13.setOnClickListener {
+            editor.putInt("siDo", 45)   //전북
+            editor.apply()
+        }
+
+        btn14.setOnClickListener {
+            editor.putInt("siDo", 46)   //전남
+            editor.apply()
+        }
+
+        btn15.setOnClickListener {
+            editor.putInt("siDo", 47)   //경북
+            editor.apply()
+        }
+
+        btn16.setOnClickListener {
+            editor.putInt("siDo", 48)   //경남
+            editor.apply()
+        }
+
+        btn17.setOnClickListener {
+            editor.putInt("siDo", 50)   //제주
+            editor.apply()
         }
     }
 

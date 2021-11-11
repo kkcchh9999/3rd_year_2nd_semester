@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">FinalProject</string>
+    <string name="start_button">알림 켜기</string>
+    <string name="end_button">알림 끄기</string>
+    <string name="data_button">데이터</string>
+    <string name="btn1">서울</string>
+    <string name="btn2">부산</string>
+    <string name="btn3">대구</string>
+    <string name="btn4">인천</string>
+    <string name="btn5">광주</string>
+    <string name="btn6">대전</string>
+    <string name="btn7">울산</string>
+    <string name="btn8">세종</string>
+    <string name="btn9">경기</string>
+    <string name="btn10">강원</string>
+    <string name="btn11">충북</string>
+    <string name="btn12">충남</string>
+    <string name="btn13">전북</string>
+    <string name="btn14">전남</string>
+    <string name="btn15">경북</string>
+    <string name="btn16">경남</string>
+    <string name="btn17">제주 </string>
+    <string name="select_where">현재 활동중인 지역을 선택하세요.</string>
 </resources>

@@ -45,7 +45,7 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-location:18.0.0'   //위치 서비스
 
-    implementation 'androidx.room:room-runtime:2.3.0'
+    implementation 'androidx.room:room-runtime:2.3.0'   //데이터베이스 서비스
     kapt 'androidx.room:room-compiler:2.3.0'
 
     testImplementation 'junit:junit:4.+'
