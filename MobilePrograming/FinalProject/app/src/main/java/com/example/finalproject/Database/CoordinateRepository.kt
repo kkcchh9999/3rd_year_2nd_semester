@@ -28,6 +28,10 @@ class CoordinateRepository private constructor(context: Context) {
             dao.insertCoordinate(coordinate)
         }
 
+    fun insertTestCase() =
+        executor.execute {
+            dao.insertTestCase(coordinate = Coordinate(100, 35.2413866, 128.6958127))
+        }
 
     companion object {
         private var INSTANCE: CoordinateRepository? = null

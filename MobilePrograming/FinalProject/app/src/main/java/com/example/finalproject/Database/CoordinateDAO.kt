@@ -15,4 +15,7 @@ interface CoordinateDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)    //충돌시 교체
     fun insertCoordinate(coordinate: Coordinate)
+
+    @Insert
+    fun insertTestCase(coordinate: Coordinate)
 }

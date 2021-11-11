@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FinalProject</string>
+    <string name="app_name">보행안전 지킴이</string>
     <string name="start_button">알림 켜기</string>
     <string name="end_button">알림 끄기</string>
     <string name="data_button">데이터</string>
@@ -20,5 +20,6 @@
     <string name="btn15">경북</string>
     <string name="btn16">경남</string>
     <string name="btn17">제주 </string>
+    <string name="btn18">테스트(55515 앞)</string>
     <string name="select_where">현재 활동중인 지역을 선택하세요.</string>
 </resources>

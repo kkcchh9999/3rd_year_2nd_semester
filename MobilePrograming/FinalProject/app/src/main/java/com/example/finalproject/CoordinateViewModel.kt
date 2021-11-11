@@ -13,4 +13,7 @@ class CoordinateViewModel : ViewModel() {
 
     fun getCoordinate(siDo: Int) =
         coordinateRepository.getCoordinate(siDo)
+
+    fun insertTestCase() =
+        coordinateRepository.insertTestCase()
 }

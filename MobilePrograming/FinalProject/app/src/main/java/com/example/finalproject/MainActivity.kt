@@ -2,6 +2,8 @@ package com.example.finalproject;
 
 import android.Manifest
 import android.app.Activity
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
@@ -14,6 +16,8 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Internet.LocationAPI
@@ -53,6 +57,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btn15: Button
     private lateinit var btn16: Button
     private lateinit var btn17: Button
+    private lateinit var btn18: Button
 
     //공유 프리퍼런스
 
@@ -151,6 +156,7 @@ class MainActivity : AppCompatActivity() {
         btn15 = findViewById(R.id.btn15)
         btn16 = findViewById(R.id.btn16)
         btn17 = findViewById(R.id.btn17)
+        btn18 = findViewById(R.id.btn18)
 
         val pref: SharedPreferences = getSharedPreferences(getString(R.string.app_name), Activity.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = pref.edit() //에디터
@@ -166,6 +172,7 @@ class MainActivity : AppCompatActivity() {
                     update(locCodeArr[i][0], locCodeArr[i][j])
                 }
             }
+            viewModel.insertTestCase()  //테스트케이스 추가
 
         } else {
             Log.d("최초실행?", "ㄴㄴ")
@@ -263,6 +270,11 @@ class MainActivity : AppCompatActivity() {
 
         btn17.setOnClickListener {
             editor.putInt("siDo", 50)   //제주
+            editor.apply()
+        }
+
+        btn18.setOnClickListener {
+            editor.putInt("siDo", 100)
             editor.apply()
         }
     }
