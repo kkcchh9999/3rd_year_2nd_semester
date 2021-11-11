@@ -2,24 +2,16 @@ package com.example.finalproject;
 
 import android.Manifest
 import android.app.Activity
-import android.app.NotificationChannel
-import android.app.NotificationManager
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
-import android.widget.ImageButton
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Internet.LocationAPI
 import com.example.finalproject.Internet.LocationInterceptor
 import com.example.finalproject.data.Coordinate
@@ -32,8 +24,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
-const val REQUEST_PERMISSION_CODE = 1
 
 class MainActivity : AppCompatActivity() {
 
@@ -59,8 +49,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btn17: Button
     private lateinit var btn18: Button
 
-    //공유 프리퍼런스
 
+    private lateinit var serviceIntent: Intent
+    //공유 프리퍼런스
     private lateinit var locationAPI: LocationAPI //데이터 파싱
     private val client = OkHttpClient.Builder() //인터셉터 인스턴스 생성
         .addInterceptor(LocationInterceptor())
@@ -166,116 +157,157 @@ class MainActivity : AppCompatActivity() {
         if (first) {
             editor.putBoolean("isFirst", false)
             editor.apply()
-            Toast.makeText(this, "최초실행", Toast.LENGTH_SHORT).show()
+
+            val dialogBuilder = AlertDialog.Builder(this)
+                .setTitle("설명서")
+                .setMessage("보행자 사고다발지역에서 자동으로 알림을 발생시켜주는 어플리케이션입니다. 위치 권한이 필요합니다.\n \n" +
+                        "현재 활동중인 지역을 선택한 후 알림 켜기를 눌러주세요. 이후에는 어플리케이션을 종료해도 무방합니다.")
+                .setPositiveButton("확인") { _, _ -> }
+
+            val dialog = dialogBuilder.create()
+            dialog.window?.setBackgroundDrawableResource(R.drawable.btn_shape)
+
             for (i in locCodeArr.indices) {
                 for (j in 1 until locCodeArr[i].size) {
                     update(locCodeArr[i][0], locCodeArr[i][j])
                 }
             }
             viewModel.insertTestCase()  //테스트케이스 추가
-
-        } else {
-            Log.d("최초실행?", "ㄴㄴ")
         }
 
+        serviceIntent = Intent(applicationContext, MyService::class.java)
         btnStart.setOnClickListener {
-            val intent = Intent(applicationContext, MyService::class.java)
-            startService(intent)    //서비스 시작
+            startService(serviceIntent)//서비스 시작
         }
 
         btnStop.setOnClickListener {
-            val intent = Intent(applicationContext, MyService::class.java)
-            stopService(intent)     //서비스 종료
+            stopService(serviceIntent)     //서비스 종료
         }
 
         btn1.setOnClickListener {
             editor.putInt("siDo", 11)   // 서울
             editor.apply()
+            stopService(serviceIntent)
+            startService(serviceIntent)
         }
 
         btn2.setOnClickListener {
             editor.putInt("siDo", 26)   //부산
             editor.apply()
+            stopService(serviceIntent)
+            startService(serviceIntent)
         }
 
         btn3.setOnClickListener {
             editor.putInt("siDo", 27)   //대구
             editor.apply()
+            stopService(serviceIntent)
+            startService(serviceIntent)
         }
 
         btn4.setOnClickListener {
             editor.putInt("siDo", 28)   //인천
             editor.apply()
+            stopService(serviceIntent)
+            startService(serviceIntent)
         }
 
         btn5.setOnClickListener {
             editor.putInt("siDo", 29)   //광주
             editor.apply()
+            stopService(serviceIntent)
+            startService(serviceIntent)
         }
 
         btn6.setOnClickListener {
             editor.putInt("siDo", 30)   //대전
             editor.apply()
+            stopService(serviceIntent)
+            startService(serviceIntent)
         }
 
         btn7.setOnClickListener {
             editor.putInt("siDo", 31)   //울산
             editor.apply()
+            stopService(serviceIntent)
+            startService(serviceIntent)
         }
 
         btn8.setOnClickListener {
             editor.putInt("siDo", 36)   // 세종
             editor.apply()
+            stopService(serviceIntent)
+            startService(serviceIntent)
         }
 
         btn9.setOnClickListener {
             editor.putInt("siDo", 41)   //경기
             editor.apply()
+            stopService(serviceIntent)
+            startService(serviceIntent)
         }
 
         btn10.setOnClickListener {
             editor.putInt("siDo", 42)   //강원
             editor.apply()
+            stopService(serviceIntent)
+            startService(serviceIntent)
         }
 
         btn11.setOnClickListener {
             editor.putInt("siDo", 43)   //충북
             editor.apply()
+            stopService(serviceIntent)
+            startService(serviceIntent)
         }
 
         btn12.setOnClickListener {
             editor.putInt("siDo", 44)   //충남
             editor.apply()
+            stopService(serviceIntent)
+            startService(serviceIntent)
         }
 
         btn13.setOnClickListener {
             editor.putInt("siDo", 45)   //전북
             editor.apply()
+            stopService(serviceIntent)
+            startService(serviceIntent)
         }
 
         btn14.setOnClickListener {
             editor.putInt("siDo", 46)   //전남
             editor.apply()
+            stopService(serviceIntent)
+            startService(serviceIntent)
         }
 
         btn15.setOnClickListener {
             editor.putInt("siDo", 47)   //경북
             editor.apply()
+            stopService(serviceIntent)
+            startService(serviceIntent)
         }
 
         btn16.setOnClickListener {
             editor.putInt("siDo", 48)   //경남
             editor.apply()
+            stopService(serviceIntent)
+            startService(serviceIntent)
         }
 
         btn17.setOnClickListener {
             editor.putInt("siDo", 50)   //제주
             editor.apply()
+            stopService(serviceIntent)
+            startService(serviceIntent)
         }
 
         btn18.setOnClickListener {
             editor.putInt("siDo", 100)
             editor.apply()
+            stopService(serviceIntent)
+            startService(serviceIntent)
         }
     }
 
@@ -287,7 +319,7 @@ class MainActivity : AppCompatActivity() {
                 call: Call<Location>,
                 t: Throwable
             ) {
-                Log.e("ERROR!!", "Failed to get Location", t)
+
             }
 
             override fun onResponse(
@@ -303,9 +335,7 @@ class MainActivity : AppCompatActivity() {
                     val coordinate = Coordinate(SiDo, 0.0, 0.0)
                     coordinate.latitude = response.body()!!.items.item[i].laCrd.toDouble()
                     coordinate.longitude = response.body()!!.items.item[i].loCrd.toDouble()
-                    Log.d("이거 왜이럼?", "$coordinate")
                     viewModel.insertCoordinate(coordinate)
-                    //coordinateList.add(coordinate)
                 }
             }
         })

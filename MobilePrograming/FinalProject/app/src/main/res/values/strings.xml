@@ -21,5 +21,5 @@
     <string name="btn16">경남</string>
     <string name="btn17">제주 </string>
     <string name="btn18">테스트(55515 앞)</string>
-    <string name="select_where">현재 활동중인 지역을 선택하세요.</string>
+    <string name="select_where">현재 활동중인 지역을 선택하세요.\n자동으로 서비스가 시작됩니다. </string>
 </resources>
