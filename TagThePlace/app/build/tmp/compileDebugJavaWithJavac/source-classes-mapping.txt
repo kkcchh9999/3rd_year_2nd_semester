@@ -1,5 +1,0 @@
-com/example/tagtheplace/BuildConfig.java
- com.example.tagtheplace.BuildConfig
-com/example/tagtheplace/MainActivity.java
- com.example.tagtheplace.MainActivity
- com.example.tagtheplace.MainActivity$1
