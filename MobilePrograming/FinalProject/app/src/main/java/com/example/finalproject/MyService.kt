@@ -70,7 +70,6 @@ class MyService : Service() {
         return START_STICKY
     }
 
-
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
@@ -80,7 +79,7 @@ class MyService : Service() {
         super.onDestroy()
     }
     @SuppressLint("MissingPermission")
-    private fun processCommand(intent: Intent?) {
+    private fun processCommand() {
         val token = CancellationTokenSource()   //캔슬 토큰??
         try {
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(this) //위치 가져오기
@@ -142,7 +141,7 @@ class MyService : Service() {
             while (isRun) {
                 handler.sendEmptyMessage(0);
                 try {
-                    sleep(30000)
+                    sleep(20000)
                 } catch (e: Exception) {
 
                 }
@@ -158,7 +157,7 @@ class MyService : Service() {
 
     inner class MyServiceHandler(private val intent: Intent?) : Handler() {
         override fun handleMessage(msg: Message) {
-            processCommand(intent)
+            processCommand()
         }
     }
 }
