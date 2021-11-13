@@ -83,20 +83,28 @@ public class MainActivity extends AppCompatActivity implements
             builder.setTitle("마커 추가하기")
                     .setView(dialogView)
                     .setPositiveButton("추가", (dialog, which) -> {
-                        if (!editName.getText().toString().equals("") && !editTag.getText().toString().equals("")) {
-                            //데이터베이스에 추가하는 내용
-                            //아래 4개로 데이터베이스에 추가
-                            //임시로 마커 추가함
-                            //쿼리 보내기
-                            Marker marker = googleMap.addMarker(
-                                    new MarkerOptions().position(latLng)
-                                    .title(editName.getText().toString())
-                                    .snippet(editTag.getText().toString())
-                            );
-                            assert marker != null;
-                            marker.showInfoWindow();
+                        if (getMyLocation().latitude - 0.0003 <= latLng.latitude &&
+                                latLng.latitude <= getMyLocation().latitude + 0.0003 &&
+                                getMyLocation().longitude - 0.0003 <= latLng.longitude &&
+                                latLng.longitude <= getMyLocation().longitude + 0.0003
+                        ) {
+                            Toast.makeText(this, "인근의 장소를 추가해 주세요", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(this, "이름, 태그를 입력하세요", Toast.LENGTH_SHORT).show();
+                            if (!editName.getText().toString().equals("") && !editTag.getText().toString().equals("")) {
+                                //데이터베이스에 추가하는 내용
+                                //아래 4개로 데이터베이스에 추가
+                                //임시로 마커 추가함
+                                //쿼리 보내기
+                                Marker marker = googleMap.addMarker(
+                                        new MarkerOptions().position(latLng)
+                                        .title(editName.getText().toString())
+                                        .snippet(editTag.getText().toString())
+                                );
+                                assert marker != null;
+                                marker.showInfoWindow();
+                            } else {
+                                Toast.makeText(this, "이름, 태그를 입력하세요", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     })
                     .setNegativeButton("취소", null)
