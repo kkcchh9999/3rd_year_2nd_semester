@@ -55,16 +55,17 @@ public class MainActivity extends AppCompatActivity implements
                 .commit();
         //권한 확인
         if (checkPermission()) {
-            mapFragment.getMapAsync(this);
+            mapFragment.getMapAsync(this::onMapReady);
         } else {
             ActivityCompat.requestPermissions(this, PERMISSIONS, 1);
         }
     }
-
+    //체크요망!!!!!!!!!!
     //Permission 결과
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        mapFragment.getMapAsync(this);
     }
 
     @SuppressLint("MissingPermission")
@@ -115,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements
         if (checkPermission()) {
             //내위치 표시
             googleMap.setMyLocationEnabled(true);
+            //체크 요망
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(getMyLocation(), DEFAULT_ZOOM));
         } else {
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(CITY_HALL, DEFAULT_ZOOM));
