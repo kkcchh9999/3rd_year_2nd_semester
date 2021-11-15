@@ -11,7 +11,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -244,8 +246,21 @@ public class MainActivity extends AppCompatActivity implements
     //내 위치 찾기
     @SuppressLint("MissingPermission")
     private LatLng getMyLocation() {
+
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+
+        if (lastKnownLocation == null) {
+            final double[] loc = new double[2];
+            LocationListener locationListener = location -> {
+                loc[0] = location.getLatitude();
+                loc[1] = location.getLongitude();
+            };
+
+            locationManager.requestLocationUpdates(String.valueOf(locationManager.getBestProvider(new Criteria(), true)), 1000, 0, locationListener);
+            return new LatLng(loc[0], loc[1]);
+        }
 
         return new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
     }
