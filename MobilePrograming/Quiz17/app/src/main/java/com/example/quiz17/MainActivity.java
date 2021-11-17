@@ -37,19 +37,16 @@ public class MainActivity extends AppCompatActivity {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
-                    @Override
-                    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        datePicker.init(year, month, day, (view, year1, monthOfYear, dayOfMonth) -> {
 
-                        fileName = Integer.toString(year) + "_"
-                                + Integer.toString(monthOfYear +1) + "+"
-                                + Integer.toString(dayOfMonth) + ".txt";
+            fileName = year1 + "_"
+                    + (monthOfYear + 1) + "+"
+                    + dayOfMonth + ".txt";
 
-                        String str = readDiary(fileName);
-                        editText.setText(str);
-                        button.setEnabled(true);
-                    }
-                });
+            String str = readDiary(fileName);
+            editText.setText(str);
+            button.setEnabled(true);
+        });
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
