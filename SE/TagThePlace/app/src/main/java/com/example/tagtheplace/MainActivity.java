@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements
 
                                 placeRepository.insertModelToDB(placeData);
                                 Toast.makeText(this, "장소 정보가 추가되었습니다.\n검색을 통해 장소를 찾아보세요", Toast.LENGTH_SHORT).show();
+                                mapFragment.getMapAsync(this);
                             } else {
                                 Toast.makeText(this, "이름, 태그를 입력하세요", Toast.LENGTH_SHORT).show();
                             }
@@ -266,7 +267,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     //권한 여부 확인
-    private Boolean checkPermission() {
+    private boolean checkPermission() {
         for (String permission : PERMISSIONS) {
             if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
                 return false;

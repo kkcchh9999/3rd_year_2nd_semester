@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel = CoordinateViewModel()   //뷰모델
 
-    private var locCodeArr = arrayOf(
+    private var locCodeArr = arrayOf(   //지역 코드 배열
         arrayOf(11, 680, 740, 305, 500, 620, 215, 530, 545, 350, 320,
             230, 590, 440, 410, 650, 200, 290, 710, 470, 560, 170,
             380, 110, 140, 260),   //서울
@@ -106,19 +106,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val locationPermissionRequest = registerForActivityResult(  //퍼미션 요청, 퍼미션 없을 때 행동
+        val locationPermissionRequest = registerForActivityResult(  //퍼미션 요청 생성
             ActivityResultContracts.RequestMultiplePermissions()
         ) { permissions ->
             when {
-                permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                    // Precise location access granted.
+                    permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+                        // Precise location access granted.
+                    }
+                    permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                        // Only approximate location access granted.
+                    } else -> {
+                    Toast.makeText(applicationContext, "권한이 필요합니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show()
+                    onDestroy() //토스트 생성, 앱 종료
                 }
-                permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                    // Only approximate location access granted.
-                } else -> {
-                Toast.makeText(applicationContext, "권한이 필요합니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show()
-                onDestroy() //토스트 생성, 앱 종료
-            }
             }
         }
 
@@ -128,6 +128,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         locationAPI = retrofit.create(LocationAPI::class.java)  //인스턴스 생성
+
         btnStart = findViewById(R.id.btn_start) //버튼 id 찾기
         btnStop = findViewById(R.id.btn_stop)
         btn1 = findViewById(R.id.btn1)
@@ -149,27 +150,34 @@ class MainActivity : AppCompatActivity() {
         btn17 = findViewById(R.id.btn17)
         btn18 = findViewById(R.id.btn18)
 
+        //공유 프리퍼런스
         val pref: SharedPreferences = getSharedPreferences(getString(R.string.app_name), Activity.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = pref.edit() //에디터
 
-        //공유 프리퍼런스
+        //공유 프리퍼런스에서 최초 실행 확인
         val first: Boolean = pref.getBoolean("isFirst", true);
-        if (first) {
-            editor.putBoolean("isFirst", false)
+        if (first) {    //최초 실행시
+            editor.putBoolean("isFirst", false) //false 로 저장
             editor.apply()
 
+            //dialogue 보여주기
             val dialogBuilder = AlertDialog.Builder(this)
                 .setTitle("설명서")
                 .setMessage("보행자 사고다발지역에서 자동으로 알림을 발생시켜주는 어플리케이션입니다. 위치 권한이 필요합니다.\n \n" +
                         "현재 활동중인 지역을 선택한 후 알림 켜기를 눌러주세요. 이후에는 어플리케이션을 종료해도 무방합니다.")
-                .setPositiveButton("확인") { _, _ -> }
+                .setPositiveButton("확인") { _, _ -> }    //아무 동작 없는 버튼
 
             val dialog = dialogBuilder.create()
-            dialog.window?.setBackgroundDrawableResource(R.drawable.btn_shape)
+            //dialogue 디자인 설정
+            dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_shape)
+            //보여주기
+            dialog.show()
 
+            //데이터 다운로드, 시 도 코드 , 구 군 코드
             for (i in locCodeArr.indices) {
                 for (j in 1 until locCodeArr[i].size) {
-                    update(locCodeArr[i][0], locCodeArr[i][j])
+                    //다운로드 메소드 실행
+                    download(locCodeArr[i][0], locCodeArr[i][j])
                 }
             }
             viewModel.insertTestCase()  //테스트케이스 추가
@@ -185,10 +193,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         btn1.setOnClickListener {
-            editor.putInt("siDo", 11)   // 서울
-            editor.apply()
-            stopService(serviceIntent)
-            startService(serviceIntent)
+            editor.putInt("siDo", 11).apply()   // 서울, 공유 프리퍼런스에 데이터 저장
+            editor.apply()              //적용
+            stopService(serviceIntent)  //진행중인 서비스 중단
+            startService(serviceIntent) //새 서비스 시작  -> 바뀐 위치정보 사용
         }
 
         btn2.setOnClickListener {
@@ -311,31 +319,32 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun update(SiDo: Int, guGun: Int) {
+    private fun download(SiDo: Int, guGun: Int) {
+        //locationAPI 를 통한 request 생성
         val locationRequest: Call<Location> = locationAPI.getLocation(SiDo.toString(), guGun.toString())
-        var loc: Location? = null
-        locationRequest.enqueue(object : Callback<Location> {
-            override fun onFailure(
+        var loc: Location? = null   //Location 객체
+        locationRequest.enqueue(object : Callback<Location> {   //쓰레드 실행
+            override fun onFailure( //실패
                 call: Call<Location>,
                 t: Throwable
             ) {
 
             }
 
-            override fun onResponse(
+            override fun onResponse(    //응답
                 call: Call<Location>,
                 response: Response<Location>
             ) {
-                if (response.body() == null) {
+                if (response.body() == null) {  //null 검사
                     return
                 }
                 loc = response.body()
 
                 for (i in response.body()!!.items.item.indices) {
-                    val coordinate = Coordinate(SiDo, 0.0, 0.0)
-                    coordinate.latitude = response.body()!!.items.item[i].laCrd.toDouble()
-                    coordinate.longitude = response.body()!!.items.item[i].loCrd.toDouble()
-                    viewModel.insertCoordinate(coordinate)
+                    val coordinate = Coordinate(SiDo, 0.0, 0.0) //시도코드, 위도, 경도로 이루어진 클래스
+                    coordinate.latitude = response.body()!!.items.item[i].laCrd.toDouble()  //위도 입력
+                    coordinate.longitude = response.body()!!.items.item[i].loCrd.toDouble() //경도 입력
+                    viewModel.insertCoordinate(coordinate)  //뷰모델에 추가 -> DAO 추가 -> 데이터베이스에 저장
                 }
             }
         })

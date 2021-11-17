@@ -6,6 +6,7 @@ import com.example.finalproject.data.Coordinate
 
 class CoordinateViewModel : ViewModel() {
 
+    //repository get
     private val coordinateRepository = CoordinateRepository.get()
 
     fun insertCoordinate(coordinate: Coordinate) =

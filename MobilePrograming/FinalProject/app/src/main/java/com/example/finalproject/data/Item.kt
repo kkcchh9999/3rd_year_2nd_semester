@@ -19,9 +19,9 @@ data class Item(
     @SerializedName("geom_json")
     var geomJson: String,
     @SerializedName("la_crd")
-    var laCrd: String,
+    var laCrd: String,  //위도
     @SerializedName("lo_crd")
-    var loCrd: String,
+    var loCrd: String,  //경도
     @SerializedName("occrrnc_cnt")
     var occrrncCnt: Int,
     @SerializedName("se_dnv_cnt")

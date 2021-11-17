@@ -9,13 +9,10 @@ import com.example.finalproject.data.Coordinate
 
 @Dao
 interface CoordinateDAO {
-
+    //시도코드로 데이터 가져오는 쿼리
     @Query("SELECT * FROM Coordinate WHERE siDo=(:siDo)")
     fun getCoordinates(siDo: Int): LiveData<List<Coordinate>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)    //충돌시 교체
+    @Insert    //데이터 입력 쿼리
     fun insertCoordinate(coordinate: Coordinate)
-
-    @Insert
-    fun insertTestCase(coordinate: Coordinate)
 }

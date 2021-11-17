@@ -9,13 +9,13 @@ class LocationInterceptor : Interceptor{    //인터셉터, 새로 url 에 내�
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest: Request = chain.request()
 
-        val newURL: HttpUrl = originalRequest.url.newBuilder()
+        val newURL: HttpUrl = originalRequest.url.newBuilder()  //기존의 URLd에 파라미터 추가
             .addQueryParameter("type", "json")
             .addQueryParameter("numOfRows", "100")
             .addQueryParameter("pageNo", "1")
             .build()
 
-        val newRequest: Request = originalRequest.newBuilder()
+        val newRequest: Request = originalRequest.newBuilder()  //request 요청
             .url(newURL)
             .build()
 
