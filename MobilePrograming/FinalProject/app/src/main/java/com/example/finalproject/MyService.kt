@@ -65,7 +65,7 @@ class MyService : Service() {
         }
 
         //서비스 핸들러
-        val handler = MyServiceHandler(intent)
+        val handler = MyServiceHandler()
         //쓰레드
         thread = ServiceThread(handler)
         //쓰레드 시작
@@ -154,7 +154,7 @@ class MyService : Service() {
     }
 
     @SuppressLint("HandlerLeak")
-    inner class MyServiceHandler(private val intent: Intent?) : Handler() {
+    inner class MyServiceHandler : Handler() {
         override fun handleMessage(msg: Message) {  //핸들러의 명령
             processCommand()    //processCommand 처리
         }
