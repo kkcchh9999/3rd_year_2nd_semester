@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.finalproject.Database.CoordinateRepository
 import com.example.finalproject.Internet.LocationAPI
 import com.example.finalproject.Internet.LocationInterceptor
 import com.example.finalproject.data.Coordinate
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         .client(client)                                     //인터셉터 추가 -> 기본 URL 편집
         .build()
 
-    private val viewModel = CoordinateViewModel()   //뷰모델
+    private val repository = CoordinateRepository.get()   //뷰모델
 
     private var locCodeArr = arrayOf(   //지역 코드 배열
         arrayOf(11, 680, 740, 305, 500, 620, 215, 530, 545, 350, 320,
@@ -180,7 +181,7 @@ class MainActivity : AppCompatActivity() {
                     download(locCodeArr[i][0], locCodeArr[i][j])
                 }
             }
-            viewModel.insertTestCase()  //테스트케이스 추가
+            repository.insertTestCase()  //테스트케이스 추가
         }
 
         serviceIntent = Intent(applicationContext, MyService::class.java)
@@ -344,7 +345,7 @@ class MainActivity : AppCompatActivity() {
                     val coordinate = Coordinate(SiDo, 0.0, 0.0) //시도코드, 위도, 경도로 이루어진 클래스
                     coordinate.latitude = response.body()!!.items.item[i].laCrd.toDouble()  //위도 입력
                     coordinate.longitude = response.body()!!.items.item[i].loCrd.toDouble() //경도 입력
-                    viewModel.insertCoordinate(coordinate)  //뷰모델에 추가 -> DAO 추가 -> 데이터베이스에 저장
+                    repository.insertCoordinate(coordinate)  //뷰모델에 추가 -> DAO 추가 -> 데이터베이스에 저장
                 }
             }
         })

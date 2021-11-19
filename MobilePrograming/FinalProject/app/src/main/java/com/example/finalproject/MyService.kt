@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.LiveData
+import com.example.finalproject.Database.CoordinateRepository
 import com.example.finalproject.data.Coordinate
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
@@ -23,7 +24,7 @@ import com.google.android.gms.tasks.CancellationTokenSource
 class MyService : Service() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient   //위치좌표 가져오기
-    private val viewModel = CoordinateViewModel()
+    private val repository = CoordinateRepository.get()
     private lateinit var coordinateList: LiveData<List<Coordinate>>
     private var myPosition: Coordinate = Coordinate(0,0.0, 0.0)
     private lateinit var thread: ServiceThread
@@ -57,9 +58,9 @@ class MyService : Service() {
         val pref = applicationContext.getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE)
         val siDo = pref.getInt("siDo", 0)
         if (siDo != 0) {    //값이 있으면
-            coordinateList = viewModel.getCoordinate(siDo)  //시도코드로 데이터베이스에서 값 읽기
+            coordinateList = repository.getCoordinate(siDo)  //시도코드로 데이터베이스에서 값 읽기
         } else {    //값이 없으면
-            coordinateList = viewModel.getCoordinate(siDo)
+            coordinateList = repository.getCoordinate(siDo)
             Toast.makeText(applicationContext, "지역을 선택해 주세요!!", Toast.LENGTH_SHORT).show()
             stopService(intent) //서비스 종료
         }
