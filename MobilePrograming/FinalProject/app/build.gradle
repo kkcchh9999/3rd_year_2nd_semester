@@ -39,9 +39,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
 
-    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
-    implementation 'com.squareup.retrofit2:converter-gson:2.7.1'    //네트워크 통신
-    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.7.1'          //retrofit2
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.1'    //컨버터
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'              //http 통신
 
     implementation 'com.google.android.gms:play-services-location:18.0.0'   //위치 서비스
 

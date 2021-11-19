@@ -60,7 +60,6 @@ class MyService : Service() {
         if (siDo != 0) {    //값이 있으면
             coordinateList = repository.getCoordinate(siDo)  //시도코드로 데이터베이스에서 값 읽기
         } else {    //값이 없으면
-            coordinateList = repository.getCoordinate(siDo)
             Toast.makeText(applicationContext, "지역을 선택해 주세요!!", Toast.LENGTH_SHORT).show()
             stopService(intent) //서비스 종료
         }
