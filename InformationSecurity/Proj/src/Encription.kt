@@ -9,7 +9,6 @@ fun main() {
     print("키를 입력하세요 : ")
     val key = readLine()
     val keySort = mutableListOf<Char>()
-    val keyMap = mutableMapOf<Char, Int>()
 
     //시프트
     if (input != null && key != null) {
@@ -36,13 +35,57 @@ fun main() {
         return
     }
 
+
+    println("shift 결과 : $shiftInput")
+
     //키 정렬
-    println(shiftInput)
     for (i in key.indices) {
         keySort.add(key[i])
     }
     keySort.sort()
-    println(keySort)
+    println("정렬된 키: $keySort")
+    //a p p l e
+    //a e l p p
+    //0 4 3 1 2
+    var check = 0
+    val keyIntArr = arrayOfNulls<Int>(key.length)
+    for (i in keySort.indices) {
+        if (check != 0) {
+            check --
+        } else {
+            for (j in key.indices) {
+                if (i != keySort.size - 1) {    //사이즈 문제
+                    if (keySort[i] != keySort[i + 1]) {
+                        if (key[j] == keySort[i]) {
+                            keyIntArr[j] = i
+                            break
+                        }
+                    } else {
+                        for (k in 1 until keySort.size - i) {
+                            if (keySort[i] == keySort[i + k]) {
+                                check++
+                                println("Check: $check")
+                            } else {
+                                break
+                            }
+                        }
+
+                        if (key[j] == keySort[i]) {
+                            for (k in 0..check) {
+                                println("Check2: $check")
+                                keyIntArr[j] = i + k
+                            }
+                        }
+                    }
+                } else {
+                    if (key[i] == keySort[j]) {
+                        keyIntArr[i] = j
+                    }
+                }
+            }
+        }
+    }
+    println("키의 순서: ${keyIntArr.contentDeepToString()}")
 
     //배열 생성
     val arrSize = if (input.length % key.length == 0) {
@@ -50,22 +93,19 @@ fun main() {
     } else {
         input.length / key.length + 1
     }
-    var array = Array(arrSize) { CharArray(key.length) }
+    var array = Array(arrSize) { CharArray(key.length) { _ -> ' '} }
 
       //배열에 저장하기
-    var countRow = 0
-    var countColumn = 0
-    for (i in input.indices) {
-
-        //중복 처리 HOW??????????
-
-//        array[countRow][keyMap[key[countColumn]]!!] = shiftInput[i]
+//    var countRow = 0
+//    var countColumn = 0
+//    for (i in input.indices) {
+//        array[countRow][keyIntList[]] = shiftInput[i]
 //        countColumn++
 //        if (countColumn >= key.length) {
 //            countColumn = 0
 //            countRow ++
 //        }
-    }
+//    }
     print("배열에 섞어서 저장 : ")
     println(array.contentDeepToString())
 
