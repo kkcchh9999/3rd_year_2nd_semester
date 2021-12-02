@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -182,6 +183,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             repository.insertTestCase()  //테스트케이스 추가
+            repository.insertCoordinate(Coordinate(48, 35.24138667, 128.6958127))
         }
 
         serviceIntent = Intent(applicationContext, MyService::class.java)
@@ -341,11 +343,13 @@ class MainActivity : AppCompatActivity() {
                 }
                 loc = response.body()
 
+
                 for (i in response.body()!!.items.item.indices) {
                     val coordinate = Coordinate(SiDo, 0.0, 0.0) //시도코드, 위도, 경도로 이루어진 클래스
                     coordinate.latitude = response.body()!!.items.item[i].laCrd.toDouble()  //위도 입력
                     coordinate.longitude = response.body()!!.items.item[i].loCrd.toDouble() //경도 입력
                     repository.insertCoordinate(coordinate)  //뷰모델에 추가 -> DAO 추가 -> 데이터베이스에 저장
+                    Log.d("이거 왜 안됨", "$coordinate")
                 }
             }
         })

@@ -130,7 +130,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_marginEnd="16dp"
-            android:text="@string/btn16"/>
+            android:text="@string/btn8"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

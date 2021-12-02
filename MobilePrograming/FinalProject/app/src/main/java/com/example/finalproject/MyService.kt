@@ -10,6 +10,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Message
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -59,6 +60,10 @@ class MyService : Service() {
         val siDo = pref.getInt("siDo", 0)
         if (siDo != 0) {    //값이 있으면
             coordinateList = repository.getCoordinate(siDo)  //시도코드로 데이터베이스에서 값 읽기
+
+            coordinateList.observeForever {
+                Log.d("siDo", "$siDo,${it.size}")
+            }
         } else {    //값이 없으면
             Toast.makeText(applicationContext, "지역을 선택해 주세요!!", Toast.LENGTH_SHORT).show()
             stopService(intent) //서비스 종료
