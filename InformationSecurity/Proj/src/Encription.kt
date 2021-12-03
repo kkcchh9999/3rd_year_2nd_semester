@@ -53,7 +53,7 @@ fun main() {
         for (j in keySort.indices) {
             if (key[i] == keySort[j]) {
                 keySequence.add(j)
-                keySort[j]='_'
+                keySort[j]=' '
             }
         }
     }
@@ -94,7 +94,7 @@ fun main() {
                 for (j in tmpKeySort.indices) {
                     if (tmpKey[i] == tmpKeySort[j]) {
                         tmpKeySequence.add(j)
-                        tmpKeySort[j]='_'
+                        tmpKeySort[j]=' '
                     }
                 }
             }
